@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "type": "Tuna",
+      "id": 834,
+      "price": 2.5
+    },
+    {
+      "type": "chicken",
+      "id": 840,
+      "price": 500.5
+    },
+    {
+      "type": "olive oil",
+      "id": 844,
+      "price": 130.5
+    },
+    {
+      "type": "chips",
+      "id": 534,
+      "price": 22.5
+    },
+    {
+      "type": "crackers",
+      "id": 234,
+      "price": 23.5
+    },
+    {
+      "type": "spaghetti",
+      "id": 531,
+      "price": 22.5
+    },
+    {
+      "type": "oats",
+      "id": 839,
+      "price": 23
+    }
+  ],
+  "history": [
+    {
+      "type": "Tuna",
+      "price": 2.5,
+      "date": "Sun Oct 02 2022 12:59:21 GMT+0300 (East Africa Time)",
+      "id": 1
+    },
+    {
+      "type": "olive oil",
+      "price": 130.5,
+      "date": "Sun Oct 02 2022 12:59:22 GMT+0300 (East Africa Time)",
+      "id": 2
+    }
+  ]
+}

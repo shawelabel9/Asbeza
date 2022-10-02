@@ -10,13 +10,13 @@ import Divider from '@mui/material/Divider'
 
 const Header = () => {
   return (
-    <div >
-        <div className="flex justify-between bg-purple-300">
-            <Divider orientation="vertical" className="font-bold" flexItem/>
-            <div className="flex gap-4  p-2 px-4">
-            <HomeIcon/>
-            <HistoryIcon/>
-            <AccountBoxIcon/>
+    <div className="sticky ">
+        <div className="flex justify-end bg-purple-400 w-full">
+            {/* <Divider orientation="vertical" className="font-bold" flexItem/> */}
+            <div className="flex gap-4 p-2 px-4">
+                <Link to="/"><HomeIcon/></Link>
+                <Link to="/history"><HistoryIcon/></Link>
+                <Link to="/profile"><AccountBoxIcon/></Link>
             </div>
             {/* <Link to="/" icon={HomeIcon} ></Link> */}
         </div>
