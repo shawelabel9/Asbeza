@@ -4,16 +4,19 @@ import Divider from '@mui/material/Divider'
 const History = () => {
 
     const [history,setHistory] = useState([])
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        setLoading(true)
         fetch('http://localhost:5000/history')
             .then(res=> res.json())
-            .then(data=> setHistory(data))
+            .then(data=> {setHistory(data);setLoading(false);})
     },[])
   return (
     <div className='flex flex-col justify-center mx-auto my-4'>
         <p className='font-bold'>HISTORY</p>
         {
+            loading?<div className="flex justify-center items-center">Loading...</div>:
             history? 
             history.map((val,id)=> 
                 <div className='flex flex-col gap-2'>
