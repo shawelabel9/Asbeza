@@ -8,7 +8,7 @@ const History = () => {
 
     useEffect(() => {
         setLoading(true)
-        fetch('http://localhost:5000/history')
+        fetch('http://localhost:8000/history')
             .then(res=> res.json())
             .then(data=> {setHistory(data);setLoading(false);})
     },[])

@@ -17,7 +17,7 @@ const Home = () => {
     const pRef = useRef(null)
 
     useEffect(()=> {
-        fetch('http://localhost:5000/items')
+        fetch('http://localhost:8000/items')
             .then((res) => res.json())
             .then(data => setItems(data))
     },[])
@@ -53,7 +53,7 @@ const Home = () => {
 
     const saveHistory = () => {
         selectedItems.map((val) => {
-            fetch('http://localhost:5000/history', {method: 'POST', headers: {'Content-type': 'application/json'}, body:JSON.stringify(val)})
+            fetch('http://localhost:8000/history', {method: 'POST', headers: {'Content-type': 'application/json'}, body:JSON.stringify(val)})
                 .then(res => res.json())
         })
         setSelectedItems([])

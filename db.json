@@ -37,29 +37,6 @@
     }
   ],
   "history": [
-    {
-      "type": "Tuna",
-      "price": 2.5,
-      "date": "Sun Oct 02 2022 16:05:29 GMT+0300 (East Africa Time)",
-      "id": 1
-    },
-    {
-      "type": "chicken",
-      "price": 500.5,
-      "date": "Sun Oct 02 2022 16:05:33 GMT+0300 (East Africa Time)",
-      "id": 2
-    },
-    {
-      "type": "chips",
-      "price": 22.5,
-      "date": "Sun Oct 02 2022 16:05:37 GMT+0300 (East Africa Time)",
-      "id": 3
-    },
-    {
-      "type": "chips",
-      "price": 22.5,
-      "date": "Sun Oct 02 2022 16:07:03 GMT+0300 (East Africa Time)",
-      "id": 4
-    }
+    
   ]
 }

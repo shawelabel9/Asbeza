@@ -1,5 +1,4 @@
 import Layout from "./layout/layout";
-import Content from "./layout/components/content" 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Home from "./features/home/home";
 import History from "./features/history/history";
