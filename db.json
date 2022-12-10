@@ -37,6 +37,29 @@
     }
   ],
   "history": [
-    
+    {
+      "type": "Tuna",
+      "price": 2.5,
+      "date": "Fri Dec 09 2022 10:39:22 GMT+0300 (East Africa Time)",
+      "id": 1
+    },
+    {
+      "type": "Tuna",
+      "price": 2.5,
+      "date": "Fri Dec 09 2022 21:19:29 GMT+0300 (East Africa Time)",
+      "id": 2
+    },
+    {
+      "type": "chicken",
+      "price": 500.5,
+      "date": "Fri Dec 09 2022 21:19:31 GMT+0300 (East Africa Time)",
+      "id": 3
+    },
+    {
+      "type": "Tuna",
+      "price": 2.5,
+      "date": "Fri Dec 09 2022 21:19:34 GMT+0300 (East Africa Time)",
+      "id": 4
+    }
   ]
 }

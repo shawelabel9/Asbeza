@@ -2,63 +2,32 @@ import React from 'react'
 import Input from '@mui/material/Input'
 import Divider from '@mui/material/Divider'
 import AddIcon from '@mui/icons-material/Add';
-import Button from '@mui/material/Button';
-import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
-import {useState,useEffect,useRef} from 'react'
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import {useEffect,useRef,useContext} from 'react'
+import {fetchItems,clickEvent, addItem, saveHistory } from '../../context/actions';
+import {ItemsContext} from '../../context/itemsProvider'
 
 const Home = () => {
-    const [items,setItems] = useState([])
-    const [selectedItems, setSelectedItems] = useState([])
-    const [isSearched,SetIsSearched] = useState(false)
-    const [inputVal,setInputVal] = useState('')
-    const [totalVal,setTotalVal] = useState(0)
     const inputRef = useRef(null)
-    const pRef = useRef(null)
-
+    const {items,selectedItems,isSearched,inputVal,totalVal,dispatch} = useContext(ItemsContext)
     useEffect(()=> {
-        fetch('http://localhost:8000/items')
-            .then((res) => res.json())
-            .then(data => setItems(data))
+        const getItems = async () => {
+            const items = await fetchItems()
+            dispatch({type: 'FETCH_DATA', payload: items})
+        }
+        getItems()
     },[])
 
     useEffect(() => {
-        const whereIsItClicked = (e) => {
-            if(inputRef.current.contains(e.target)){
-                SetIsSearched(true)
-            } 
+        const listenClickEvent = (e) => {
+            clickEvent( e, inputRef, dispatch)
         }
-        document.addEventListener("mousedown", whereIsItClicked)
+        document.addEventListener("mousedown", listenClickEvent)
 
-        return () => document.removeEventListener("mousedown", whereIsItClicked)
+        return () => document.removeEventListener("mousedown", listenClickEvent)
     },[isSearched])
+
     const handleClick = (e) => {
-        setInputVal(e.target.innerText)
-    }
-    const addItem = () => {
-        let sum = totalVal
-        if(inputVal){
-            items.map((val) => {
-                if(val.type === inputVal){
-                    setSelectedItems(prev => prev.concat({type: val.type, price: val.price, date: new Date().toString()}) )
-                    sum += val.price
-                }
-                setInputVal('')
-                SetIsSearched(false)
-                setTotalVal(sum)
-            })
-        }
-
-    }
-
-    const saveHistory = () => {
-        selectedItems.map((val) => {
-            fetch('http://localhost:8000/history', {method: 'POST', headers: {'Content-type': 'application/json'}, body:JSON.stringify(val)})
-                .then(res => res.json())
-        })
-        setSelectedItems([])
-        setTotalVal(0)
-        
+        dispatch({type: 'ADD_INPUT_VAL', payload: e.target.innerText})
     }
 
     return (
@@ -67,13 +36,14 @@ const Home = () => {
                 <div className='flex'>
                     <div className="flex flex-col">
                         <Input className="border" ref={inputRef} value={inputVal} placeholder="Add an item"/>
-                    {isSearched ? 
-                        <div className="h-40 overflow-scroll flex flex-col">
-                            {items.map((val,id)=> 
-                                <p id={id} className="hover:bg-slate-300 cursor-pointer" onClick={handleClick} ref={pRef}>{val.type}</p>)}
-                        </div>: null }
+                        {isSearched ? 
+                            <div className="h-40 overflow-scroll flex flex-col">
+                                {items.map((val,id)=> 
+                                    <p id={id} className="hover:bg-slate-300 cursor-pointer" onClick={handleClick} >{val.type}</p>)}
+                            </div>: null 
+                        }
                     </div>
-                    <button  className="border rounded-lg self-start bg-purple-300 text-white px-2 mx-2 hover:bg-purple-500" onClick={addItem}> <AddIcon/>Add Item </button>
+                    <button  className="border rounded-lg self-start bg-purple-300 text-white px-2 mx-2 hover:bg-purple-500" onClick={() => {addItem(totalVal, inputVal, items,dispatch,)}}> <AddIcon/>Add Item </button>
                 </div>
                 <div className="flex gap-4">
                     <div className=" px-2">
@@ -95,13 +65,13 @@ const Home = () => {
                         {selectedItems ? <div className="flex gap-2 my-2"><p className="font-bold">Total: </p>${totalVal} <p></p></div>:null}
                     </div>
                     <div>
-                        <button className="border border-red-300 px-2 bg-slate-200 text-red-500" onClick={() => {setSelectedItems([]); setTotalVal(0);}}>Clear</button>
+                        <button className="border border-red-300 px-2 bg-slate-200 text-red-500" onClick={() => {dispatch({type: 'CLEAR'})}}>Clear</button>
                     </div>
                     
                 </div>
             </div>
             <div className="self-end">
-                <button  className="border rounded-lg self-start bg-purple-300 text-white px-2 mx-2 hover:bg-purple-500 m-2" onClick={saveHistory}> Save </button>
+                <button  className="border rounded-lg self-start bg-purple-300 text-white px-2 mx-2 hover:bg-purple-500 m-2" onClick={() => {saveHistory(selectedItems,dispatch)}}> Save </button>
             </div>
         </div>
     )
